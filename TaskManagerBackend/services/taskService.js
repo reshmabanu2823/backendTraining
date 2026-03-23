@@ -1,40 +1,35 @@
 const tasks = require("../data/tasks");
 
-// Get tasks of user
-function getUserTasks(userId) {
-  return tasks.filter(task => task.userId === userId);
+function getAllTasks() {
+
+return tasks;
+
 }
 
-// Add new task
-function addTask(taskData) {
+function createTask(task) {
 
-  const newTask = {
-    id: tasks.length + 1,
-    ...taskData,
-    completed: false
-  };
+tasks.push(task);
 
-  tasks.push(newTask);
-  return newTask;
+return task;
+
 }
 
-// Task analytics
-function taskSummary(userTasks) {
+function deleteTask(id) {
 
-  const completed = userTasks.filter(t => t.completed).length;
+const index = tasks.findIndex(t => t.id == id);
 
-  const pending =
-    userTasks.reduce(
-      (count, task) =>
-        task.completed ? count : count + 1,
-      0
-    );
+if(index === -1){
+throw new Error("Task not found");
+}
 
-  return { completed, pending };
+tasks.splice(index,1);
+
 }
 
 module.exports = {
-  getUserTasks,
-  addTask,
-  taskSummary
+
+getAllTasks,
+createTask,
+deleteTask
+
 };

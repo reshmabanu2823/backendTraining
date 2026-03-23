@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-tasks"></i>
+                <span>Task Manager</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="my-tasks">
+                    <i class="fas fa-list"></i>
+                    <span>My Tasks</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-main">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <p id="user-name" class="user-name">User</p>
+                            <p class="user-email">user@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="dashboard-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="content-section active">
+                    <div class="welcome-section">
+                        <h2>Welcome, <span id="welcome-name">User</span>! 👋</h2>
+                        <p>Here's your task management overview</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Total Tasks</h3>
+                                <p class="stat-number" id="total-tasks">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Completed</h3>
+                                <p class="stat-number" id="completed-tasks">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Pending</h3>
+                                <p class="stat-number" id="pending-tasks">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <button class="btn btn-primary" id="add-task-btn">
+                            <i class="fas fa-plus"></i>
+                            Add New Task
+                        </button>
+                    </div>
+                </section>
+
+                <!-- My Tasks Section -->
+                <section id="my-tasks" class="content-section">
+                    <div class="section-header">
+                        <h2>My Tasks</h2>
+                        <button class="btn btn-primary" id="add-task-btn-2">
+                            <i class="fas fa-plus"></i>
+                            New Task
+                        </button>
+                    </div>
+
+                    <!-- Add Task Form -->
+                    <div class="add-task-box" id="add-task-box" style="display: none;">
+                        <h3>Create New Task</h3>
+                        <form id="taskForm" class="task-form">
+                            <div class="form-group">
+                                <input 
+                                    type="text" 
+                                    id="task-title" 
+                                    placeholder="Enter task title..."
+                                    required
+                                >
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-check"></i>
+                                    Add Task
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="cancel-task-btn">
+                                    <i class="fas fa-times"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                            <small class="error-message" id="task-error-message"></small>
+                        </form>
+                    </div>
+
+                    <!-- Tasks List -->
+                    <div class="tasks-container" id="tasks-container">
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h3>No tasks yet</h3>
+                            <p>Create your first task to get started</p>
+                        </div>
+                    </div>
+
+                    <!-- Update Button -->
+                    <div class="update-section" id="update-section" style="display: none;">
+                        <button class="btn btn-success" id="update-tasks-btn">
+                            <i class="fas fa-save"></i>
+                            UPDATE
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section">
+                    <div class="section-header">
+                        <h2>Settings</h2>
+                    </div>
+
+                    <div class="settings-box">
+                        <h3>Account Information</h3>
+                        <div class="info-field">
+                            <label>Full Name</label>
+                            <p id="settings-name">-</p>
+                        </div>
+                        <div class="info-field">
+                            <label>Email Address</label>
+                            <p id="settings-email">-</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-box">
+                        <h3>Preferences</h3>
+                        <div class="setting-option">
+                            <label>
+                                <input type="checkbox" id="notifications-toggle" checked>
+                                Enable Notifications
+                            </label>
+                        </div>
+                        <div class="setting-option">
+                            <label>
+                                <input type="checkbox" id="dark-mode-toggle">
+                                Dark Mode
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-box danger-zone">
+                        <h3>Danger Zone</h3>
+                        <button class="btn btn-danger" id="clear-all-tasks-btn">
+                            <i class="fas fa-trash"></i>
+                            Clear All Tasks
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Task Modal/Toast for notifications -->
+    <div id="notification" class="notification"></div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
